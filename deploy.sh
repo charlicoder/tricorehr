@@ -29,10 +29,12 @@ npm run build || { echo "❌ Build failed!"; exit 1; }
 # Step 4: Start or restart app with PM2
 echo "🚦 Starting $APP_NAME with PM2..."
 pm2 delete "$APP_NAME" >/dev/null 2>&1
-pm2 start npm --name "$APP_NAME" -- run start -- -p $PORT || { echo "❌ PM2 start failed!"; exit 1; }
+# pm2 start npm --name "$APP_NAME" -- run start -- -p $PORT || { echo "❌ PM2 start failed!"; exit 1; }
 
+
+# npx serve@latest out -l 3003
 # pm2 start npx --name "quantumhr" -- serve out -l 3002
-# pm2 start npx --name "$APP_NAME" -- serve out -l $PORT || { echo "❌ PM2 start failed!"; exit 1; }
+pm2 start npx --name "$APP_NAME" -- serve out -l $PORT || { echo "❌ PM2 start failed!"; exit 1; }
 
 
 # Step 5: Save PM2 process list for auto-start on reboot
